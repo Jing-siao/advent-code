@@ -30,4 +30,4 @@ for (let z = 1; z <= lines.length; z++) {
   step2 = 0
   temp2 = [];
 }
-console.log("part2:", Math.min(...fuel))
+console.log("part1:", Math.min(...fuel))
