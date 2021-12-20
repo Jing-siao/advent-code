@@ -72,22 +72,50 @@ for (let i = 0; i < AllArr.length; i++) {
     let length = arr[i][0][y].length;
     let text = arr[i][0][y];
     if (length === 6) {
-      if (text.includes(marked[i].num4[0]) && text.includes(marked[i].num4[1]) && text.includes(marked[i].num4[2]) && text.includes(marked[i].num4[3])) {
-        console.log(text, true)
-      } else {
-        console.log(text, false)
+      let count4 = 0;
+      for (let x = 0; x < 4; x++) {
+        if (!text.includes(marked[i].num4[x])) {
+          break;
+        }
+        count4 += 1;
+        if (count4 === 4) {
+          marked[i].num9 = Array.from(text);
+        }
+
+
       }
+      count4 = 0;
+      for (let x = 0; x < 2; x++) {
+        if (text.includes(marked[i].num1[x])) {
+          count4 += 1;
+        }
+        count4 += 1;
+        if (count4 === 1) {
+          marked[i].num6 = Array.from(text);
+        }
+        if (count4 === 2) {
+          marked[i].num0 = Array.from(text);
+        }
+
+
+      }
+
+
     }
   };
 
 
 };
+// if (text.includes(marked[i].num4[x]]) && text.includes(marked[i].num4[1]) && text.includes(marked[i].num4[2]) && text.includes(marked[i].num4[3])) {
+//   marked[i].num9 = Array.from(text);
+// } else {
 
+// }
 
 console.log(arr)
-// let a = 'abcde';
-// let b = Array.from(a);
-// console.log(b);
+let a = 'abcde';
+let b = Array.from(a);
+console.log(b);
 
 // const pets = ['cat', 'dog', 'bat'];
 
