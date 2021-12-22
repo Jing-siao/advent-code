@@ -21,7 +21,7 @@ function floodfill(i, j, map) {
   if (j + 1 < map[i].length) {
     size += floodfill(i, j + 1, map);
   }
-  console.log(size)
+  // console.log(size)
   return size;
 }
 
@@ -41,7 +41,7 @@ function part2() {
     const line = lines[i];
     for (let j = 0; j < line.length; j++) {
       const size = floodfill(i, j, map);
-
+      console.log(size)
       if (size > 0) {
         console.log("");
         console.log(map.map((x) => x.join``).join`\n`);
