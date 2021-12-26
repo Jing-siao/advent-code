@@ -17,10 +17,19 @@ for (let i = 0; i < AllArr.length; i++) {
 wholeArr.push(outer);
 wholeArr.unshift(outer);
 let fromAllArr = wholeArr;
+
+//創一個二為陣列長度為102x102，for第二部分使用
+let newArr = new Array();
+for (let i = 0; i < 102; i++) {
+  newArr[i] = new Array();
+  for (let j = 0; j < 102; j++) {
+    newArr[i][j] = 0;
+  };
+};
 //找出最低點
 let low = [];
 let part1 = [];
-count1 = 0;
+count1 = 1;
 for (let i = 1; i < wholeArr.length - 1; i++) {
   wholeArr[i] = Array.from(wholeArr[i]);
   fromAllArr[i] = Array.from(fromAllArr[i]);
@@ -32,53 +41,63 @@ for (let i = 1; i < wholeArr.length - 1; i++) {
     let left = parseInt(wholeArr[i][y - 1]);
     if (now < up && now < down && now < right && now < left) {
       part1.push(now + 1);
+      low.push(now);
+      newArr[i][y] = count1;
+      count1 += 1;
+    };
+    if (now === 9) {
+      newArr[i][y] = 999;
     }
   };
 };
 console.log("part1:", part1.reduce((a, b) => a + b, 0));
 
+//將最外圈改為999
+for (let i = 0; i < 102; i++) {
+  for (let j = 0; j < 102; j++) {
+    newArr[0][j] = 999;
+    newArr[101][j] = 999;
+    newArr[i][0] = 999;
+    newArr[i][101] = 999;
+  };
+};
 
-// for (let i = 0; i < fromAllArr.length; i++) {
-//   // console.log(fromAllArr[i])
-//   let long = fromAllArr[i].length;
-//   for (let y = 0; y < long; y++) {
-//     fromAllArr[i][y] === "9" ?
-//       fromAllArr[i][y] = 1 :
-//       fromAllArr[i][y] = 0;
-//   }
-// };
+//朝狀往外擴散最低點的數值
+for (let k = 0; k < 100; k++) {// 做幾次巢狀往外擴
+  for (let i = 1; i < 101; i++) {
+    for (let j = 1; j < 101; j++) {
+      let now = newArr[i][j];
+      let up = newArr[i - 1][j];
+      let down = newArr[i + 1][j];
+      let right = newArr[i][j + 1];
+      let left = newArr[i][j - 1];
+      if (now < 999 && now > 0) {
+        if (down < 999) newArr[i + 1][j] = now;
+        if (up < 999) newArr[i - 1][j] = now;
+        if (right < 999) newArr[i][j + 1] = now;
+        if (left < 999) newArr[i][j - 1] = now;
+      };
+    };
+  };
+};
 
-// let counts = [];
-// for (let i = 1; i < fromAllArr.length - 1; i++) {
-//   let length = fromAllArr[i].length;
-//   for (let y = 1; y < length - 1; y++) {
-//     let now = fromAllArr[i][y];
-//     let up = fromAllArr[i - 1][y];
-//     let down = fromAllArr[i + 1][y];
-//     let right = fromAllArr[i][y + 1];
-//     let left = fromAllArr[i][y - 1];
-//     let count = 1;
-//     if (now === 0) {
-//       now = 1;
-//       if (up === 0) {
-//         count += 1;
-//         up = 1;
-//       };
-//       if (down === 0) {
-//         count += 1;
-//         down = 1;
-//       };
-//       if (right === 0) {
-//         count += 1;
-//         right = 1;
-//       };
-//       if (left === 0) {
-//         count += 1;
-//         left = 1;
-//       };
-//       counts.push(count)
-//     };
-//   }
-// }
+let count2 = 1;
+let lowArr = [];
+for (let i = 1; i < 101; i++) {
+  for (let j = 1; j < 101; j++) {
+    if (newArr[i][j] === count2) {
+      let lengthArr = []
+      lengthArr.push(newArr[i][j]);
+      lowArr.push(lengthArr.length)
+    }
+  };
+};
 
-console.log(low, fromAllArr)
+
+
+console.log(newArr, lowArr);
+
+
+
+
+
