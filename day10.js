@@ -1,5 +1,5 @@
 // part 1
-let text = document.getElementById('day9').innerHTML;
+let text = document.getElementById('day10').innerHTML;
 // n代表换行，\r代表回车，可以加个\s代表空格
 let AllArr = text.split(/[(\r\n\s)]+/);
 let long = AllArr[0].length;
